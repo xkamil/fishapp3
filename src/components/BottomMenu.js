@@ -27,28 +27,30 @@ function BottomMenu(props) {
               direction="row"
               justify="center"
               alignItems="stretch"
-              spacing={0}
               className="BottomMenu"
         >
-
-            <Grid item>
-                <Fab color="primary" aria-label="filter" className='filterButton'>
-                    <FilterIcon/>
-                </Fab>
-            </Grid>
+            <If isTrue={mapMode === MapMode.VIEW_MARKERS}>
+                <Grid item>
+                    <Fab color="primary" aria-label="filter" className='filterButton'>
+                        <FilterIcon/>
+                    </Fab>
+                </Grid>
+            </If>
 
             <If isTrue={mapMode === MapMode.ADD_MARKER}>
                 <Grid item>
-                    <Button variant="contained" color="primary" size="large">
+                    <Fab color="primary" aria-label="fish" variant="extended" onClick={() => addItem('shop')}>
                         Add
-                    </Button>
+                    </Fab>
                 </Grid>
                 <Grid item>
-                    <Button variant="contained" color="secondary" size="large" onClick={()=> setMapMode(MapMode.VIEW_MARKERS)}>
+                    <Fab color="secondary" aria-label="fish" variant="extended"
+                         onClick={() => setMapMode(MapMode.VIEW_MARKERS)}>
                         Cancel
-                    </Button>
+                    </Fab>
                 </Grid>
             </If>
+
             <Grid container
                   direction="column"
                   justify="center"
@@ -57,34 +59,37 @@ function BottomMenu(props) {
                   className="addItemMenu"
             >
 
-                <If isFalse={isExpanded}>
-                    <Grid item>
-                        <Fab color="primary" aria-label="add" onClick={toggleExpand}>
-                            <AddIcon/>
-                        </Fab>
-                    </Grid>
+
+                <If isTrue={mapMode === MapMode.VIEW_MARKERS}>
+
+                    <If isFalse={isExpanded}>
+                        <Grid item>
+                            <Fab color="primary" aria-label="add" onClick={toggleExpand}>
+                                <AddIcon/>
+                            </Fab>
+                        </Grid>
+                    </If>
+
+                    <If isTrue={isExpanded}>
+                        <Grid item>
+                            <Fab color="primary" aria-label="fish" onClick={() => addItem('shop')}>
+                                Shop
+                            </Fab>
+                        </Grid>
+
+                        <Grid item>
+                            <Fab color="primary" aria-label="fish" onClick={() => addItem('fish')}>
+                                Fish
+                            </Fab>
+                        </Grid>
+
+                        <Grid item>
+                            <Fab color="secondary" aria-label="close" onClick={toggleExpand}>
+                                <CloseIcon/>
+                            </Fab>
+                        </Grid>
+                    </If>
                 </If>
-
-                <If isTrue={isExpanded}>
-                    <Grid item>
-                        <Fab color="primary" aria-label="fish" onClick={() => addItem('shop')}>
-                            Shop
-                        </Fab>
-                    </Grid>
-
-                    <Grid item>
-                        <Fab color="primary" aria-label="fish" onClick={() => addItem('fish')}>
-                            Fish
-                        </Fab>
-                    </Grid>
-
-                    <Grid item>
-                        <Fab color="secondary" aria-label="close" onClick={toggleExpand}>
-                            <CloseIcon/>
-                        </Fab>
-                    </Grid>
-                </If>
-
             </Grid>
         </Grid>
     );

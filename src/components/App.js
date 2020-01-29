@@ -4,6 +4,7 @@ import {Container} from "@material-ui/core";
 import Map from "./Map";
 import BottomMenu from "./BottomMenu";
 import MapMode from "./MapMode";
+import Alert from '@material-ui/lab/Alert';
 
 const markers = [
     {
