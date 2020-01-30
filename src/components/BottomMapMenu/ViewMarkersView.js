@@ -9,6 +9,7 @@ import {useSelector} from "react-redux";
 import MarkerFilter from "../../model/MarkerFilter";
 
 function ViewMarkersView() {
+   const d = useSelector(store => store.app.dictionary);
    const mapFilter = useSelector(store => store.map.filter);
 
    function enableAddMarkerMode() {
@@ -28,11 +29,11 @@ function ViewMarkersView() {
               <Grid item>
                  <Fab color={mapFilter !== MarkerFilter.FISH ? 'default' : 'primary'} aria-label="filter"
                       onClick={setFishFilter}>
-                    FISH
+                    {d.FISHES}
                  </Fab>
                  <Fab color={mapFilter !== MarkerFilter.SHOP ? 'default' : 'primary'} aria-label="filter"
                       onClick={setShopFilter}>
-                    SHOP
+                    {d.SHOPS}
                  </Fab>
               </Grid>
 

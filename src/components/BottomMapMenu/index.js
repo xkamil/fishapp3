@@ -8,15 +8,15 @@ import Grid from "@material-ui/core/Grid";
 
 
 function BottomMapMenu() {
-   const mapMode = useSelector(store => store.map.mapMode);
+    const mapMode = useSelector(store => store.map.mapMode);
+    const menu = mapMode === MapMode.VIEW_MARKERS ? <ViewMarkersView/> : <AddMarkerView/>;
 
-   const menu = mapMode === MapMode.VIEW_MARKERS ? <ViewMarkersView/> : <AddMarkerView/>;
-
-   return <Grid container
-                direction="row"
-                justify="space-between"
-
-                className="BottomMenu">{menu}</Grid>
+    return (
+        <Grid container
+              direction="row"
+              justify="space-between"
+              className="BottomMenu">{menu}</Grid>
+    );
 
 }
 

@@ -1,5 +1,5 @@
-import {updateMarkers} from "./redux/actions/markerActions";
-import MarkerType from "./model/MarkerType";
+import {updateMarkers} from "../redux/actions/markerActions";
+import MarkerType from "../model/MarkerType";
 
 const exampleMarkers = getRandomMarkers();
 

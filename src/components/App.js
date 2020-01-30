@@ -1,27 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import './App.css';
-import {Container} from "@material-ui/core";
-import Map from "./Map/Map";
-import Api from "../Api";
-import BottomMapMenu from "./BottomMapMenu";
-import Grid from "@material-ui/core/Grid";
-import AddItemDialog from "./AddItemDialog";
-
+import React from 'react';
+import Map from "./Map";
+import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function App() {
-   useEffect(Api.getMarkers);
+    const redirectTo = useSelector(store => store.app.redirectTo);
 
-   return (
-           <Container className="App" maxWidth='md' disableGutters={true}>
-              <Map/>
-              <Grid container direction="row" className="appButtonContainer">
-                 <BottomMapMenu/>
-              </Grid>
-
-              <AddItemDialog/>
-           </Container>
-
-   );
+    return (
+        <BrowserRouter>
+            <Switch>
+                <Route path="/">
+                    <Map/>
+                </Route>
+            </Switch>
+            <Redirect to={redirectTo} push={true}/>
+        </BrowserRouter>
+    );
 }
 
 export default App;
