@@ -10,6 +10,7 @@ function Map() {
 
    const markers = useSelector(store => store.markers.fetched);
    const mapMode = useSelector(store => store.map.mapMode);
+   const mapFilter = useSelector(store => store.map.filter);
    const tmpMarker = useSelector(store => store.map.tmpMarker);
 
    useEffect(initializeMap, []);
@@ -25,13 +26,30 @@ function Map() {
    function addMarkers() {
       const lg = window.L.layerGroup();
       if (mapMode === MapMode.VIEW_MARKERS) {
-         markers.forEach(marker => window.L.marker(marker.latlng).addTo(lg));
+         markers.filter(marker => marker.type === mapFilter)
+                 .map(marker => createMarker(marker))
+                 .forEach(marker => marker.addTo(lg));
       } else if (mapMode === MapMode.ADD_MARKER && tmpMarker) {
          window.L.marker(tmpMarker.latlng).addTo(lg)
       }
       window.map.addLayer(lg);
 
       return () => window.map.removeLayer(lg);
+   }
+
+   function createMarker(marker) {
+      const L = window.L;
+
+      const iconOptions = {
+         iconUrl: marker.type.icon,
+         iconSize: [40, 40],
+      };
+
+      const markerOptions = {
+         icon: L.icon(iconOptions)
+      };
+
+      return L.marker(marker.latlng, markerOptions);
    }
 
    function onMapClicked(mouseEvent) {

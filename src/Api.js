@@ -1,34 +1,14 @@
 import {updateMarkers} from "./redux/actions/markerActions";
+import MarkerType from "./components/MarkerType";
 
-const exampleMarkers = [
-   {
-      id: 'abc1',
-      latLng: [50, 30],
-      icon: "https://img.icons8.com/officel/16/000000/marker.png"
-   },
-   {
-      id: 'abc1',
-      latLng: [50.5, 30.3],
-      icon: "https://img.icons8.com/officel/16/000000/marker.png"
-   },
-   {
-      id: 'abc1',
-      latLng: [50, 31],
-      icon: "https://img.icons8.com/officel/16/000000/marker.png"
-   },
-   {
-      id: 'abc1',
-      latLng: [51, 32],
-      icon: "https://img.icons8.com/officel/16/000000/marker.png"
-   }
-];
+const exampleMarkers = getRandomMarkers();
 
 
 const Api = {
 
    getMarkers: () => {
       setTimeout(() => {
-         updateMarkers(getRandomMarkers())
+         updateMarkers(exampleMarkers)
       }, getRandomInt(1, 1000))
    }
 };
@@ -45,7 +25,8 @@ function getRandomMarkers() {
    for (let i = 0; i < 50; i++) {
       const marker = {
          id: Math.random(),
-         latlng: [getRandomInt(0, 90), getRandomInt(0, 90)]
+         latlng: [getRandomInt(0, 90), getRandomInt(0, 90)],
+         type: i % 4 === 0 ? MarkerType.SHOP : MarkerType.FISH
       };
       markers.push(marker)
    }

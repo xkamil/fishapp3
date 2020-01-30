@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import './index.css';
 import MapMode from "../MapMode";
 import {useSelector} from "react-redux";
-import {updateMapMode} from "../../redux/actions/mapActions";
+import {setMapMode} from "../../redux/actions/mapActions";
 
 function AddMarkerView() {
    const tmpMarker = useSelector(store => store.map.tmpMarker);
@@ -25,7 +25,7 @@ function AddMarkerView() {
               </Grid>
               <Grid item>
                  <Fab color="secondary" aria-label="fish" variant="extended"
-                      onClick={() => updateMapMode(MapMode.VIEW_MARKERS)}>
+                      onClick={() => setMapMode(MapMode.VIEW_MARKERS)}>
                     Cancel
                  </Fab>
               </Grid>

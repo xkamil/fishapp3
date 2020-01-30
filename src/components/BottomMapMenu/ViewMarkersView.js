@@ -2,24 +2,22 @@ import React, {useState} from 'react';
 import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
 import FilterIcon from '@material-ui/icons/FilterList';
-import CloseIcon from '@material-ui/icons/Close';
 import Grid from "@material-ui/core/Grid";
-import If from "../If";
 import './index.css';
 import MapMode from "../MapMode";
-import {updateMapMode} from "../../redux/actions/mapActions";
+import {setMapFilter, setMapMode} from "../../redux/actions/mapActions";
+import {useSelector} from "react-redux";
+import MarkerType from "../MarkerType";
 
 function ViewMarkersView() {
-   const [isExpanded, setExpanded] = useState(false);
+   const mapFilter = useSelector(store => store.map.filter);
 
-   function toggleExpand() {
-      setExpanded(!isExpanded);
+
+   function enableAddMarkerMode() {
+      setMapMode(MapMode.ADD_MARKER);
    }
 
-   function addItem(itemType) {
-      updateMapMode(MapMode.ADD_MARKER);
-      setExpanded(false);
-   }
+
 
    return (
            <Grid container
@@ -29,11 +27,15 @@ function ViewMarkersView() {
                  className="BottomMenu">
 
               <Grid item>
-                 <Fab color="primary" aria-label="filter" className='filterButton'>
-                    <FilterIcon/>
+                 <Fab color={mapFilter !== MarkerType.FISH ? 'default' : 'primary'} aria-label="filter" onClick={() => setMapFilter(MarkerType.FISH)}>
+                    FISH
                  </Fab>
               </Grid>
-
+              <Grid item>
+                 <Fab color={mapFilter !== MarkerType.SHOP ? 'default' : 'primary'} aria-label="filter" onClick={() => setMapFilter(MarkerType.SHOP)}>
+                    SHOP
+                 </Fab>
+              </Grid>
 
               <Grid container
                     direction="column"
@@ -42,33 +44,11 @@ function ViewMarkersView() {
                     spacing={0}
                     className="addItemMenu">
 
-                 <If isFalse={isExpanded}>
-                    <Grid item>
-                       <Fab color="primary" aria-label="add" onClick={toggleExpand}>
-                          <AddIcon/>
-                       </Fab>
-                    </Grid>
-                 </If>
-
-                 <If isTrue={isExpanded}>
-                    <Grid item>
-                       <Fab color="primary" aria-label="fish" onClick={() => addItem('shop')}>
-                          Shop
-                       </Fab>
-                    </Grid>
-
-                    <Grid item>
-                       <Fab color="primary" aria-label="fish" onClick={() => addItem('fish')}>
-                          Fish
-                       </Fab>
-                    </Grid>
-
-                    <Grid item>
-                       <Fab color="secondary" aria-label="close" onClick={toggleExpand}>
-                          <CloseIcon/>
-                       </Fab>
-                    </Grid>
-                 </If>
+                 <Grid item>
+                    <Fab color="primary" aria-label="add" onClick={enableAddMarkerMode}>
+                       <AddIcon/>
+                    </Fab>
+                 </Grid>
 
               </Grid>
            </Grid>

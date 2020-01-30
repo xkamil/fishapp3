@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
 import {UPDATE_MARKERS, UPDATE_TMP_MARKER} from "../actions/markerActions";
 import MapMode from "../../components/MapMode";
-import {UPDATE_MAP_MODE} from "../actions/mapActions";
+import {SET_MAP_FILTER, UPDATE_MAP_MODE} from "../actions/mapActions";
+import MarkerType from "../../components/MarkerType";
 
 const markersInitialState = {fetched: []};
 
@@ -15,7 +16,11 @@ function markers(state = markersInitialState, action) {
    }
 }
 
-const mapInitialState = {mapMode: MapMode.VIEW_MARKERS, tmpMarker: null};
+const mapInitialState = {
+   mapMode: MapMode.VIEW_MARKERS,
+   filter: MarkerType.FISH,
+   tmpMarker: null
+};
 
 function map(state = mapInitialState, action) {
    switch (action.type) {
@@ -24,6 +29,9 @@ function map(state = mapInitialState, action) {
       }
       case UPDATE_TMP_MARKER : {
          return {...state, tmpMarker: action.data};
+      }
+      case SET_MAP_FILTER : {
+         return {...state, filter: action.data};
       }
       default:
          return state;
