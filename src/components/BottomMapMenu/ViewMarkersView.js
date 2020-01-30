@@ -11,7 +11,6 @@ import MarkerFilter from "../../model/MarkerFilter";
 function ViewMarkersView() {
    const mapFilter = useSelector(store => store.map.filter);
 
-
    function enableAddMarkerMode() {
       setMapMode(MapMode.ADD_MARKER);
    }

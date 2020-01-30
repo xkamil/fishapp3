@@ -5,39 +5,66 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import {Dialog, DialogContent} from "@material-ui/core";
 import {useSelector} from "react-redux";
-import {AppView} from "../../redux/actions/appActions";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import {setMapMode} from "../../redux/actions/mapActions";
+import MapMode from "../../model/MapMode";
+import {updateTmpMarker} from "../../redux/actions/markerActions";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Input from "@material-ui/core/Input";
+
+const fishTypes = [
+   {title: 'Okoń', name: 'okon'},
+   {title: 'Sum', name: 'sum'},
+   {title: 'Szczupak', name: 'szczupak'},
+];
 
 function AddItemDialog() {
-   const view = useSelector(store => store.app.view);
+   const mapMode = useSelector(store => store.map.mapMode);
+   const tmpMarker = useSelector(store => store.map.tmpMarker);
 
+   function onSave() {
+
+   }
+
+   function onCancel() {
+      updateTmpMarker(null);
+      setMapMode(MapMode.VIEW_MARKERS);
+   }
 
    return (
-           <Dialog open={view === AppView.ADD_ITEM}>
+           <Dialog open={mapMode === MapMode.SAVE_MARKER && !!tmpMarker}>
               <DialogContent dividers>
+                 <Grid container spacing={2} direction="column">
+                    <Grid item>
+                       <Autocomplete
+                               options={fishTypes}
+                               getOptionLabel={option => option.title}
 
-              <Grid container spacing={2} direction="column">
-                 <Grid item>
-                    <InputLabel id="label">Fish type</InputLabel>
-                    <Select labelId="label" id="select" value="20">
-                       <MenuItem value="2">Okoń</MenuItem>
-                       <MenuItem value="1">Szczupak krol wod</MenuItem>
-                    </Select>
-                 </Grid>
+                               renderInput={params => (
+                                       <TextField {...params} label="Fish type" fullWidth/>
+                               )}
+                       />
+                    </Grid>
 
-                 <Grid item>
-                    <TextField id="standard-basic" label="Fish length" />
+                    <Grid item>
+                       <Input id="standard-basic" label="Length" endAdornment={<InputAdornment position="end">Cm</InputAdornment>}/>
+                    </Grid>
+
+                    <Grid item>
+                       <Input id="standard-basic" label="Weight" endAdornment={<InputAdornment position="end">Kg</InputAdornment>}/>
+                    </Grid>
                  </Grid>
-              </Grid>
               </DialogContent>
+
               <DialogActions>
-                 <Button autoFocus color="primary">
+                 <Button autoFocus color="primary" onClick={onSave}>
                     Save
                  </Button>
-                 <Button autoFocus color="primary">
-                   Cancel
+                 <Button autoFocus color="primary" onClick={onCancel}>
+                    Cancel
                  </Button>
               </DialogActions>
            </Dialog>
