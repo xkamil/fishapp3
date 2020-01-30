@@ -34,7 +34,10 @@ function AddItemDialog() {
               </DialogContent>
               <DialogActions>
                  <Button autoFocus color="primary">
-                    Save changes
+                    Save
+                 </Button>
+                 <Button autoFocus color="primary">
+                   Cancel
                  </Button>
               </DialogActions>
            </Dialog>
