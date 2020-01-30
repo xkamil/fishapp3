@@ -1,23 +1,4 @@
 .BottomMenu {
-    position: absolute;
-    bottom: 20px;
-    padding: 0;
-    margin: 0;
-}
-
-.BottomMenu .addItemMenu {
-    position: absolute;
-    bottom: 0;
-    right: 20px;
-    max-width: 100px;
-}
-
-.BottomMenu .addItemMenu button {
-    margin: 0;
-}
-
-.BottomMenu .filterButton {
-    position: absolute;
-    left: 20px;
-    bottom: 0;
+    align-self: flex-end;
+    padding: 15px;
 }

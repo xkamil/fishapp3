@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './Map.css';
-import MapMode from "./MapMode";
+import MapMode from "../../model/MapMode";
 import {useSelector} from 'react-redux'
-import {updateTmpMarker} from "../redux/actions/markerActions";
+import {updateTmpMarker} from "../../redux/actions/markerActions";
 
 
 function Map() {
@@ -26,7 +26,7 @@ function Map() {
    function addMarkers() {
       const lg = window.L.layerGroup();
       if (mapMode === MapMode.VIEW_MARKERS) {
-         markers.filter(marker => marker.type === mapFilter)
+         markers.filter(marker => marker.type.filter === mapFilter)
                  .map(marker => createMarker(marker))
                  .forEach(marker => marker.addTo(lg));
       } else if (mapMode === MapMode.ADD_MARKER && tmpMarker) {

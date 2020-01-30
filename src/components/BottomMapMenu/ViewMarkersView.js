@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
-import FilterIcon from '@material-ui/icons/FilterList';
 import Grid from "@material-ui/core/Grid";
 import './index.css';
-import MapMode from "../MapMode";
+import MapMode from "../../model/MapMode";
 import {setMapFilter, setMapMode} from "../../redux/actions/mapActions";
 import {useSelector} from "react-redux";
-import MarkerType from "../MarkerType";
+import MarkerFilter from "../../model/MarkerFilter";
 
 function ViewMarkersView() {
    const mapFilter = useSelector(store => store.map.filter);
@@ -17,41 +16,33 @@ function ViewMarkersView() {
       setMapMode(MapMode.ADD_MARKER);
    }
 
+   function setShopFilter() {
+      setMapFilter(MarkerFilter.SHOP)
+   }
 
+   function setFishFilter() {
+      setMapFilter(MarkerFilter.FISH)
+   }
 
    return (
-           <Grid container
-                 direction="row"
-                 justify="center"
-                 alignItems="stretch"
-                 className="BottomMenu">
-
+           <>
               <Grid item>
-                 <Fab color={mapFilter !== MarkerType.FISH ? 'default' : 'primary'} aria-label="filter" onClick={() => setMapFilter(MarkerType.FISH)}>
+                 <Fab color={mapFilter !== MarkerFilter.FISH ? 'default' : 'primary'} aria-label="filter"
+                      onClick={setFishFilter}>
                     FISH
                  </Fab>
-              </Grid>
-              <Grid item>
-                 <Fab color={mapFilter !== MarkerType.SHOP ? 'default' : 'primary'} aria-label="filter" onClick={() => setMapFilter(MarkerType.SHOP)}>
+                 <Fab color={mapFilter !== MarkerFilter.SHOP ? 'default' : 'primary'} aria-label="filter"
+                      onClick={setShopFilter}>
                     SHOP
                  </Fab>
               </Grid>
 
-              <Grid container
-                    direction="column"
-                    justify="center"
-                    alignItems="flex-end"
-                    spacing={0}
-                    className="addItemMenu">
-
-                 <Grid item>
-                    <Fab color="primary" aria-label="add" onClick={enableAddMarkerMode}>
-                       <AddIcon/>
-                    </Fab>
-                 </Grid>
-
+              <Grid item>
+                 <Fab color="primary" aria-label="add" onClick={enableAddMarkerMode}>
+                    <AddIcon/>
+                 </Fab>
               </Grid>
-           </Grid>
+           </>
    );
 }
 

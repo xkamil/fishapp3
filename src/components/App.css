@@ -3,4 +3,13 @@
   position: relative;
 }
 
+.appButtonContainer {
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+}
+
+.appButtonContainer *{
+  pointer-events: auto;
+}
 

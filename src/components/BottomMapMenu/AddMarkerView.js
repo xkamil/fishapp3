@@ -1,36 +1,35 @@
 import React from 'react';
 import Fab from "@material-ui/core/Fab";
 import Grid from "@material-ui/core/Grid";
-import './index.css';
-import MapMode from "../MapMode";
+import MapMode from "../../model/MapMode";
 import {useSelector} from "react-redux";
 import {setMapMode} from "../../redux/actions/mapActions";
+import {AppView, setAppView} from "../../redux/actions/appActions";
 
 function AddMarkerView() {
    const tmpMarker = useSelector(store => store.map.tmpMarker);
 
-   return (
-           <Grid container
-                 direction="row"
-                 justify="center"
-                 alignItems="stretch"
-                 className="BottomMenu">
+   function onAdd() {
+      setAppView(AppView.ADD_ITEM)
+   }
 
+   function onCancel() {
+      setMapMode(MapMode.VIEW_MARKERS)
+   }
+
+   return (
+           <>
               <Grid item>
-                 <Fab color="primary" aria-label="fish" variant="extended" onClick={() => {
-                 }}
-                      disabled={!tmpMarker}>
+                 <Fab color="primary" aria-label="fish" variant="extended" onClick={onAdd} disabled={!tmpMarker}>
                     Add
                  </Fab>
               </Grid>
               <Grid item>
-                 <Fab color="secondary" aria-label="fish" variant="extended"
-                      onClick={() => setMapMode(MapMode.VIEW_MARKERS)}>
+                 <Fab color="secondary" aria-label="fish" variant="extended" onClick={onCancel}>
                     Cancel
                  </Fab>
               </Grid>
-
-           </Grid>
+           </>
    )
 }
 
