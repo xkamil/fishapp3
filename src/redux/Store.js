@@ -1,12 +1,12 @@
 const Store = {
 
-   init: function (store) {
-      this.store = store;
-   },
+    init: function (store) {
+        this.store = store;
+    },
 
-   dispatch: function (action) {
-      this.store.dispatch(action);
-   }
+    dispatch: function (type, data) {
+        this.store.dispatch({type, data});
+    }
 };
 
 export default Store;
