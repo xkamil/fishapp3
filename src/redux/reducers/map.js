@@ -10,14 +10,15 @@ const mapInitialState = {
 };
 
 function map(state = mapInitialState, action) {
-    console.log(action);
-
 
     switch (action.type) {
         case SET_MAP_MODE : {
             return {...state, mode: action.data,};
         }
         case UPDATE_TMP_MARKER : {
+            if (state.mode !== MapMode.ADD_MARKER) {
+                return state;
+            }
             return {...state, tmpMarker: action.data};
         }
         case SET_MAP_FILTER : {
