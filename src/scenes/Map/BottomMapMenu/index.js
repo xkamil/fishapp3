@@ -5,6 +5,7 @@ import {setMapFilter, setMapMode} from "../../../redux/actions/mapActions";
 import MapMode from "../../../model/MapMode";
 import MapFilter from "../../../model/MapFilter";
 import {redirectTo} from "../../../redux/actions/appActions";
+import {setTmpMarkerType, updateTmpMarker} from "../../../redux/actions/markerActions";
 
 
 function BottomMapMenu() {
@@ -14,21 +15,20 @@ function BottomMapMenu() {
     }
 
     function setShopFilter() {
-        setMapFilter(MapFilter.SHOP)
+        setMapFilter(MapFilter.SHOP);
     }
 
     function setFishFilter() {
-        setMapFilter(MapFilter.FISH)
+        setMapFilter(MapFilter.FISH);
     }
 
     function onCancel() {
-        redirectTo('/map');
-        setMapMode(MapMode.VIEW_MARKERS)
+        updateTmpMarker(null);
+        setMapMode(MapMode.VIEW_MARKERS);
     }
 
-    function onOk() {
-        redirectTo('/map/additem');
-        setMapMode(MapMode.DESCRIBE_MARKER)
+    function onSetMarkerType(type) {
+        setTmpMarkerType(type);
     }
 
     return <BottomMapMenuView
@@ -36,7 +36,7 @@ function BottomMapMenu() {
         setShopFilter={setShopFilter}
         setFishFilter={setFishFilter}
         onCancel={onCancel}
-        onOk={onOk}
+        onSetMarkerType={onSetMarkerType}
     />
 
 }

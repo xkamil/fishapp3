@@ -1,26 +1,15 @@
-#map {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
+.MapScreen {
+    width: 100%;
+    height: 100%;
 }
 
-.Map {
-  height: 100%;
-  position: relative;
-  pointer-events: none;
+.height100 {
+    height: 100%
 }
 
-.appButtonContainer {
-  height: 100%;
-  position: absolute;
-  pointer-events: none;
-}
-
-.appButtonContainer *{
-  pointer-events: auto;
+.mapOverlayButtonContainer {
+    z-index: 401;
+    position: relative;
 }
 
 

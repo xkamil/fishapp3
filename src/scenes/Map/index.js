@@ -9,11 +9,17 @@ import BottomMapMenu from "./BottomMapMenu";
 import AddItemDialog from "./AddItemDialog";
 import Api from "../../services/Api";
 import {Switch, Route} from "react-router-dom";
+import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 
 
-function Map() {
+function MapScreen() {
     const tileServer = 'http://89.25.168.94/hot/{z}/{x}/{y}.png';
-    const L = window.L;
+
+    const position = {
+        lat: 51.505,
+        lng: -0.09,
+        zoom: 3,
+    };
 
     const markers = useSelector(store => store.markers.fetched);
     const mapMode = useSelector(store => store.map.mode);
@@ -21,66 +27,35 @@ function Map() {
     const tmpMarker = useSelector(store => store.map.tmpMarker);
 
     useEffect(Api.getMarkers);
-    useEffect(initializeMap, []);
-    useEffect(addMarkers);
 
-    function initializeMap() {
-        window.map = L.map('map').setView([25.36629, 25.83335], 4);
-        L.tileLayer(tileServer).addTo(window.map);
-        window.map.addEventListener('click', onMapClicked);
-    }
-
-    function addMarkers() {
-        const lg = window.L.layerGroup();
-        if (mapMode === MapMode.VIEW_MARKERS) {
-            markers.filter(marker => marker.type.filter === mapFilter)
-                .map(marker => createMarker(marker))
-                .forEach(marker => marker.addTo(lg));
-        } else if ((mapMode === MapMode.ADD_MARKER || mapMode === MapMode.DESCRIBE_MARKER) && !!tmpMarker) {
-            L.marker(tmpMarker.latlng).addTo(lg)
+    function handleMapClicked(mouseEvent) {
+        if (mapMode === MapMode.ADD_MARKER) {
+            updateTmpMarker(mouseEvent);
         }
-        window.map.addLayer(lg);
-
-        return () => window.map.removeLayer(lg);
     }
 
-    function createMarker(marker) {
-        const iconOptions = {
-            iconUrl: marker.type.icon,
-            iconSize: [40, 40],
-        };
-        const markerOptions = {
-            icon: L.icon(iconOptions)
-        };
-        return L.marker(marker.latlng, markerOptions);
-    }
-
-    function onMapClicked(mouseEvent) {
-        const marker = {
-            latlng: mouseEvent.latlng,
-        };
-        updateTmpMarker(marker);
+    function Markers() {
+        if (mapMode === MapMode.VIEW_MARKERS) {
+            return markers
+                .filter(marker => marker.type.filter === mapFilter)
+                .map(marker => <Marker key={marker.id} position={marker.latlng}/>)
+        } else {
+            return tmpMarker ? <Marker position={tmpMarker.latlng}/> : '';
+        }
     }
 
     return (
-        <>
-            <div id="map"/>
-            <Container className="Map" maxWidth='md' disableGutters={true}>
-                <Grid container direction="row" className="appButtonContainer">
+        <Map center={position} zoom={position.zoom} className="MapScreen" onClick={handleMapClicked}>
+            <TileLayer url={tileServer}/>
+            <Markers/>
+            <Container className="mapOverlayButtonContainer height100" maxWidth='md' disableGutters={true}>
+                <Grid container className='height100'>
                     <BottomMapMenu/>
                 </Grid>
-                <Switch>
-                    <Route path='/map/additem'>
-                        <AddItemDialog/>
-                    </Route>
-                </Switch>
+                <AddItemDialog/>
             </Container>
-        </>
+        </Map>
     );
 }
 
-function Markers(){
-
-}
-
-export default Map;
+export default MapScreen;

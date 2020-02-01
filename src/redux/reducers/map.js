@@ -1,4 +1,4 @@
-import {UPDATE_TMP_MARKER} from "../actions/markerActions";
+import {SET_TMP_MARKER_TYPE, UPDATE_TMP_MARKER} from "../actions/markerActions";
 import MapMode from "../../model/MapMode";
 import {SET_MAP_FILTER, SET_MAP_MODE} from "../actions/mapActions";
 import MapFilter from "../../model/MapFilter";
@@ -16,10 +16,18 @@ function map(state = mapInitialState, action) {
             return {...state, mode: action.data,};
         }
         case UPDATE_TMP_MARKER : {
-            if (state.mode !== MapMode.ADD_MARKER) {
-                return state;
-            }
-            return {...state, tmpMarker: action.data};
+            return {
+                ...state,
+                tmpMarker: action.data,
+                mode: state.mode === MapMode.ADD_MARKER ? MapMode.SET_MARKER_TYPE : state.mode
+            };
+        }
+        case SET_TMP_MARKER_TYPE : {
+            return {
+                ...state,
+                tmpMarker: {...state.tmpMarker, type: action.data},
+                mode: MapMode.DESCRIBE_MARKER
+            };
         }
         case SET_MAP_FILTER : {
             return {...state, filter: action.data};

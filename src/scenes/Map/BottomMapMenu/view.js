@@ -3,9 +3,10 @@ import './index.css';
 import MapMode from "../../../model/MapMode";
 import {useSelector} from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import MapFilter from "../../../model/MapFilter";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import CloseIcon from "@material-ui/icons/Close";
+import MarkerType from "../../../model/MarkerType";
 
 
 function BottomMapMenuView(props) {
@@ -50,19 +51,26 @@ function ViewMarkers(props) {
 
 function AddMarker(props) {
     const d = useSelector(store => store.app.dictionary);
-    const marker = useSelector(store => store.map.tmpMarker);
-    const {onCancel, onOk} = props;
+    const mapMode = useSelector(store => store.map.mode);
+    const {onCancel, onSetMarkerType} = props;
 
     return (
         <>
             <Grid item>
-                <Fab color="primary" variant="extended" disabled={!marker} onClick={onOk}>
-                    {d.OK}
-                </Fab>
+                {mapMode === MapMode.SET_MARKER_TYPE &&
+                <>
+                    <Fab color="primary" onClick={() => onSetMarkerType(MarkerType.FISH)}>
+                        {d.FISH}
+                    </Fab>
+                    <Fab color="primary" onClick={() => onSetMarkerType(MarkerType.SHOP)}>
+                        {d.SHOP}
+                    </Fab>
+                </>
+                }
             </Grid>
             <Grid item>
-                <Fab color="secondary" variant="extended" onClick={onCancel}>
-                    {d.CANCEL}
+                <Fab color="secondary" onClick={onCancel}>
+                    <CloseIcon/>
                 </Fab>
             </Grid>
         </>

@@ -23,9 +23,7 @@ function getRandomMarkers() {
    const markers = [];
 
    function getRandomType(i) {
-      if (i % 5 === 0) {
-         return MarkerType.FISH_GROUP
-      } else if (i % 4 === 0) {
+      if (i % 4 === 0) {
          return MarkerType.FISH
       }
       return MarkerType.SHOP

@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from "./Map";
+import MapScreen from "./Map";
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import {useSelector} from "react-redux";
 
@@ -10,7 +10,7 @@ function App() {
         <BrowserRouter>
             <Switch>
                 <Route path="/">
-                    <Map/>
+                    <MapScreen/>
                 </Route>
             </Switch>
             <Redirect to={redirectTo} push={true}/>

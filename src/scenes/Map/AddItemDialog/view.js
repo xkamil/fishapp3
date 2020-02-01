@@ -8,13 +8,15 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Input from "@material-ui/core/Input";
+import MapMode from "../../../model/MapMode";
 
 function AddItemDialogView(props) {
     const D = useSelector(store => store.app.dictionary);
+    const mapMode = useSelector(store => store.map.mode);
     const {fishTypes, onSave, onCancel} = props;
 
     return (
-        <Dialog open={true}>
+        <Dialog open={mapMode === MapMode.DESCRIBE_MARKER}>
             <DialogTitle>{D.ADD_FISH}</DialogTitle>
 
             <DialogContent dividers>
