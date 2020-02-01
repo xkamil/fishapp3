@@ -1,8 +1,8 @@
 import {REDIRECT_TO, SET_APP_DICTIONARY} from "../actions/appActions";
-import dictionary from "../../model/dictionary";
+import Dictionary from "../../model/Dictionary";
 
 const appInitialState = {
-    dictionary,
+    dictionary: Dictionary,
     redirectTo: '/'
 };
 

@@ -1,4 +1,4 @@
-const dictionary = {
+const Dictionary = {
     FISH: "ryba",
     ADD_FISH: "Dodaj rybę",
     FISHES: "ryby",
@@ -10,4 +10,4 @@ const dictionary = {
     LENGTH: "dlugość"
 };
 
-export default dictionary;
+export default Dictionary;

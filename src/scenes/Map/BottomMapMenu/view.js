@@ -1,9 +1,9 @@
 import React from 'react';
 import './index.css';
-import MapMode from "../../../model/mapMode";
+import MapMode from "../../../model/MapMode";
 import {useSelector} from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import markerFilter from "../../../model/markerFilter";
+import MapFilter from "../../../model/MapFilter";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -31,10 +31,10 @@ function ViewMarkers(props) {
     return (
         <>
             <Grid item>
-                <Fab color={mapFilter !== markerFilter.FISH ? 'default' : 'primary'} onClick={setFishFilter}>
+                <Fab color={mapFilter !== mapFilter.FISH ? 'default' : 'primary'} onClick={setFishFilter}>
                     {d.FISHES}
                 </Fab>
-                <Fab color={mapFilter !== markerFilter.SHOP ? 'default' : 'primary'} onClick={setShopFilter}>
+                <Fab color={mapFilter !== mapFilter.SHOP ? 'default' : 'primary'} onClick={setShopFilter}>
                     {d.SHOPS}
                 </Fab>
             </Grid>

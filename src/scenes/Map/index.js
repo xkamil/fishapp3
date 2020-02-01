@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import './index.css';
-import MapMode from "../../model/mapMode";
+import MapMode from "../../model/MapMode";
 import {useSelector} from 'react-redux'
 import {updateTmpMarker} from "../../redux/actions/markerActions";
 import {Container} from "@material-ui/core";
@@ -77,6 +77,10 @@ function Map() {
             </Container>
         </>
     );
+}
+
+function Markers(){
+
 }
 
 export default Map;

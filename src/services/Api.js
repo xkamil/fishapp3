@@ -1,5 +1,5 @@
 import {updateMarkers} from "../redux/actions/markerActions";
-import markerType from "../model/markerType";
+import MarkerType from "../model/MarkerType";
 
 const exampleMarkers = getRandomMarkers();
 
@@ -24,11 +24,11 @@ function getRandomMarkers() {
 
    function getRandomType(i) {
       if (i % 5 === 0) {
-         return markerType.FISH_GROUP
+         return MarkerType.FISH_GROUP
       } else if (i % 4 === 0) {
-         return markerType.FISH
+         return MarkerType.FISH
       }
-      return markerType.SHOP
+      return MarkerType.SHOP
    }
 
    for (let i = 0; i < 50; i++) {

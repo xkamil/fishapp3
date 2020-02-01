@@ -1,6 +1,6 @@
 import React from 'react';
 import {setMapMode} from "../../../redux/actions/mapActions";
-import MapMode from "../../../model/mapMode";
+import MapMode from "../../../model/MapMode";
 import {redirectTo} from "../../../redux/actions/appActions";
 import AddItemDialogView from "./view";
 

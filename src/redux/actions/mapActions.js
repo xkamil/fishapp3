@@ -1,5 +1,5 @@
 import Store from "../Store";
-import MapMode from "../../model/mapMode";
+import MapMode from "../../model/MapMode";
 import {updateTmpMarker} from "./markerActions";
 
 export const SET_MAP_MODE = 'SET_MAP_MODE';

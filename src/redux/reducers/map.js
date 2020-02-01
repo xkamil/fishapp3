@@ -1,11 +1,11 @@
 import {UPDATE_TMP_MARKER} from "../actions/markerActions";
-import MapMode from "../../model/mapMode";
+import MapMode from "../../model/MapMode";
 import {SET_MAP_FILTER, SET_MAP_MODE} from "../actions/mapActions";
-import markerFilter from "../../model/markerFilter";
+import MapFilter from "../../model/MapFilter";
 
 const mapInitialState = {
     mode: MapMode.VIEW_MARKERS,
-    filter: markerFilter.FISH,
+    filter: MapFilter.FISH,
     tmpMarker: null
 };
 

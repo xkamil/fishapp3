@@ -2,8 +2,8 @@ import React from 'react';
 import './index.css';
 import BottomMapMenuView from "./view";
 import {setMapFilter, setMapMode} from "../../../redux/actions/mapActions";
-import MapMode from "../../../model/mapMode";
-import markerFilter from "../../../model/markerFilter";
+import MapMode from "../../../model/MapMode";
+import MapFilter from "../../../model/MapFilter";
 import {redirectTo} from "../../../redux/actions/appActions";
 
 
@@ -14,11 +14,11 @@ function BottomMapMenu() {
     }
 
     function setShopFilter() {
-        setMapFilter(markerFilter.SHOP)
+        setMapFilter(MapFilter.SHOP)
     }
 
     function setFishFilter() {
-        setMapFilter(markerFilter.FISH)
+        setMapFilter(MapFilter.FISH)
     }
 
     function onCancel() {
